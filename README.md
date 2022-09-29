@@ -9,9 +9,7 @@ cd game-changer //open the folder
 
 git clone git@github.com:Darksw20/game-changer-front.git //clone game-changer-back
 
-git clone git@github.com:Darksw20/game-changer-back.git //clone game-changer-front
-
-// manual copy the next files .back.env .front.env .env and docker-compose.yml
+// manual copy the next files .back.env .env and docker-compose.yml
 
 docker-compose build --no-cache //Run docker-compose build --no-cache to build the images
 
