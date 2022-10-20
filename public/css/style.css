@@ -1,8 +1,15 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+.template {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
