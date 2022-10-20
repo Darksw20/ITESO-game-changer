@@ -14,10 +14,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.set("view engine", "handlebars");
+app.set("view engine", "hbs");
 app.set("views", "./views");
 
-app.engine("handlebars", engine());
+app.engine(
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultView: "default",
+    layoutsDir: __dirname + "/views/pages/",
+    partialsDir: __dirname + "/views/partials/",
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 
