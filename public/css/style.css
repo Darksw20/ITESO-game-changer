@@ -1,4 +1,8 @@
 body {
+  background-image: url(/images/back.jpeg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: right;
 }
 
 a {

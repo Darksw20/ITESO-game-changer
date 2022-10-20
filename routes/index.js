@@ -27,6 +27,8 @@ router.get("/login", function (req, res, next) {
     layout: "reglogin",
     title: "Login Page",
     template: "template login-template",
+    register: false,
+    login: true,
   });
 });
 
@@ -35,6 +37,8 @@ router.get("/register", function (req, res, next) {
     layout: "reglogin",
     title: "Register Page",
     template: "template register-template",
+    register: true,
+    login: false,
   });
 });
 
@@ -56,7 +60,7 @@ router.get("/profile", function (req, res, next) {
 
 router.get("/events", function (req, res, next) {
   res.render("dashboard", {
-    layout: "events",
+    layout: "select",
     title: "Select Events",
     template: "template events-template",
   });
