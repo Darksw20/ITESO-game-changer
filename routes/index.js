@@ -15,36 +15,65 @@ router.get("/healthcheck", function (req, res, next) {
 //------------------------------------------------------
 
 router.get("/home", function (req, res, next) {
-  res.render("login", { layout: "home", template: "home-template" });
+  res.render("login", {
+    layout: "home",
+    title: "Home Page",
+    template: "home-template",
+  });
 });
 
 router.get("/login", function (req, res, next) {
-  res.render("login", { layout: "login", template: "login-template" });
+  res.render("login", {
+    layout: "reglogin",
+    title: "Login Page",
+    template: "login-template",
+  });
 });
 
 router.get("/register", function (req, res, next) {
-  res.render("login", { layout: "register", template: "register-template" });
+  res.render("login", {
+    layout: "reglogin",
+    title: "Register Page",
+    template: "register-template",
+  });
 });
 
 router.get("/search", function (req, res, next) {
-  res.render("dashboard", { layout: "search", template: "search-template" });
+  res.render("dashboard", {
+    layout: "search",
+    title: "Search Event",
+    template: "search-template",
+  });
 });
 
 router.get("/profile", function (req, res, next) {
-  res.render("dashboard", { layout: "profile", template: "profile-template" });
+  res.render("dashboard", {
+    layout: "profile",
+    title: "Profile",
+    template: "profile-template",
+  });
 });
 
 router.get("/events", function (req, res, next) {
-  res.render("dashboard", { layout: "events", template: "events-template" });
+  res.render("dashboard", {
+    layout: "events",
+    title: "Select Events",
+    template: "events-template",
+  });
 });
 
 router.get("/control", function (req, res, next) {
-  res.render("dashboard", { layout: "control", template: "control-template" });
+  res.render("dashboard", {
+    layout: "control",
+    title: "Control Events",
+    template: "control-template",
+  });
 });
 
 router.get("/analytics", function (req, res, next) {
   res.render("dashboard", {
     layout: "analytics",
+    title: "Analitycs",
     template: "analytics-template",
   });
 });
