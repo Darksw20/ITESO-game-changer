@@ -44,3 +44,18 @@ svg {
   padding: 25px;
   border-radius: 10px;
 }
+
+.dashboard-layout {
+  height: 100%;
+}
+
+.dashboard-sidebar i {
+  margin: 10px;
+}
+
+.dashboard-sidebar .title {
+  padding: 30px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
