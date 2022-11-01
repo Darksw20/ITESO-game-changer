@@ -4,7 +4,7 @@ const router = express.Router();
 /* Public pages */
 //------------------------------------------------------
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express2" });
+  res.redirect("/home");
 });
 
 router.get("/healthcheck", function (req, res, next) {
