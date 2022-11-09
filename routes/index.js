@@ -4,7 +4,7 @@ const router = express.Router();
 /* Public pages */
 //------------------------------------------------------
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express2" });
+  res.redirect("/home");
 });
 
 router.get("/healthcheck", function (req, res, next) {
@@ -47,6 +47,7 @@ router.get("/search", function (req, res, next) {
     layout: "search",
     title: "Search Event",
     template: "template search-template",
+    search: "active",
   });
 });
 
@@ -55,6 +56,7 @@ router.get("/profile", function (req, res, next) {
     layout: "profile",
     title: "Profile",
     template: "template profile-template",
+    profile: "active",
   });
 });
 
@@ -63,6 +65,7 @@ router.get("/events", function (req, res, next) {
     layout: "select",
     title: "Select Events",
     template: "template events-template",
+    events: "active",
   });
 });
 
@@ -71,6 +74,7 @@ router.get("/control", function (req, res, next) {
     layout: "control",
     title: "Control Events",
     template: "template control-template",
+    control: "active",
   });
 });
 
@@ -79,6 +83,7 @@ router.get("/analytics", function (req, res, next) {
     layout: "analytics",
     title: "Analitycs",
     template: "template analytics-template",
+    analytics: "active",
   });
 });
 module.exports = router;
