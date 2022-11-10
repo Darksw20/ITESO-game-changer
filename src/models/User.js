@@ -1,4 +1,4 @@
-export class User {
+export class User extends Model {
   constructor(firstName, lastName, username, password) {
     this.firstName = firstName;
     this.lastName = lastName;

@@ -1,4 +1,4 @@
-export class Match {
+export class Match extends Model{
   constructor(time, place, score) {
     this.time = time;
     this.place = place;
