@@ -1,5 +1,6 @@
 export class Model {
-    constructor(table) {
+    constructor(table, fillable) {
       this.table = table;
+      this.fillable  = fillable;
     }
   }
