@@ -23,16 +23,18 @@ module.exports = class Connection {
     this.con.end();
   }
   query(query = "", params = []) {
-    if (params.length > 0) {
-      this.con.query(query, params, (err, result, fields) => {
-        if (err) throw err;
-        console.log(result);
-      });
-    } else {
-      this.con.query(query, (err, result, fields) => {
-        if (err) throw err;
-        console.log(result);
-      });
-    }
+    return new Promise((resolve, reject) => {
+      if (params.length > 0) {
+        this.con.query(query, params, (err, result, fields) => {
+          if (err) throw err;
+          resolve(result);
+        });
+      } else {
+        this.con.query(query, (err, result, fields) => {
+          if (err) throw err;
+          resolve(result);
+        });
+      }
+    });
   }
 };
