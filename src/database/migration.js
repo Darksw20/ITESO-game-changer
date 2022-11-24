@@ -39,6 +39,7 @@ const init = () => {
     const migrations = await initializeDB();
 
     fs.readdirSync(normalizedPath).forEach(async (file) => {
+      console.log(!migrations.includes(file), file);
       if (!migrations.includes(file)) {
         const [migrationName] = file.split(".");
         addMigration(migrationName);
