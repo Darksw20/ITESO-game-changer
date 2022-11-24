@@ -1,4 +1,5 @@
 # game-changer-back
+
 A simple and also very complex tournament automatic diagramer.
 
 Para instalar
@@ -14,5 +15,7 @@ git clone git@github.com:Darksw20/game-changer-front.git //clone game-changer-ba
 docker-compose build --no-cache //Run docker-compose build --no-cache to build the images
 
 docker-compose up //Run docker-compose up to run the instances
+
+npm run migrate // To create the database model (When the console print Done migrations is ready the database)
 
 //start developing
