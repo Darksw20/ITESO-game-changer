@@ -5,25 +5,28 @@ module.exports = class Model {
     this.db = new Connection();
   }
 
+  async get(data) {
+    const sql = QueryBuilder.filter(this.table, data);
+    console.log("get", sql);
+    return await this.db.query(sql);
+  }
+
   async create(data) {
     const sql = QueryBuilder.save(this.table, data);
+    console.log("create", sql);
     return await this.db.query(sql, Object.values(data));
   }
 
-  getOne() {
-    return;
+  async update(data, where) {
+    const sql = QueryBuilder.update(this.table, data, where);
+    console.log("update", sql);
+    return await this.db.query(sql, Object.values(data));
   }
 
-  list() {
-    return;
-  }
-
-  update() {
-    return;
-  }
-
-  delete() {
-    return;
+  async delete(id) {
+    const sql = `DELETE FROM ${this.table} WHERE id = ?`;
+    console.log("delete", sql);
+    return await this.db.query(sql, [id]);
   }
 };
 

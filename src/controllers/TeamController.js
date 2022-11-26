@@ -5,11 +5,19 @@ module.exports = class TeamController {
     res.send("respond with a resource");
   }
 
-  getInfo(req, res, next) {
+  get(req, res, next) {
+    res.send("respond with a resource");
+  }
+
+  addMembers(req, res, next) {
     res.send("respond with a resource");
   }
 
   getMembers(req, res, next) {
+    res.send("respond with a resource");
+  }
+
+  deleteMember(req, res, next) {
     res.send("respond with a resource");
   }
 

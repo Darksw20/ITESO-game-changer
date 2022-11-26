@@ -9,7 +9,11 @@ module.exports = class EventController {
     res.send(newEvent);
   }
 
-  getInfo(req, res, next) {
+  get(req, res, next) {
+    res.send("respond with a resource");
+  }
+
+  list(req, res, next) {
     res.send("respond with a resource");
   }
 

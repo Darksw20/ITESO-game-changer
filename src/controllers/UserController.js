@@ -2,10 +2,11 @@ module.exports = class UserController {
   constructor() {}
 
   create(req, res, next) {
+    console.log(req.body);
     res.send("respond with a resource");
   }
 
-  getInfo(req, res, next) {
+  get(req, res, next) {
     res.send("respond with a resource");
   }
 

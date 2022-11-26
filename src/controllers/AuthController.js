@@ -4,4 +4,8 @@ module.exports = class AuthController {
   login(req, res, next) {
     res.send("respond with a resource");
   }
+
+  logout(req, res, next) {
+    res.send("respond with a resource");
+  }
 };

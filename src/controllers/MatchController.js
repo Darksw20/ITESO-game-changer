@@ -5,7 +5,7 @@ module.exports = class MatchController {
     res.send("respond with a resource");
   }
 
-  getInfo(req, res, next) {
+  get(req, res, next) {
     res.send("respond with a resource");
   }
 
