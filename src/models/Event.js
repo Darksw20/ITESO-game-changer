@@ -2,6 +2,7 @@ const Model = require("./Model");
 
 module.exports = class Event extends Model {
   constructor(name, startDate, endDate, ubication) {
+    super();
     this.table = "event";
     this.fillable = ["name", "startDate", "endDate", "ubication"];
 

@@ -2,6 +2,7 @@ const Model = require("./Model");
 
 module.exports = class Match extends Model {
   constructor(time, place, score) {
+    super();
     this.table = "match";
     this.fillable = ["time", "place", "score"];
 

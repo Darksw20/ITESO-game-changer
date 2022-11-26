@@ -1,7 +1,10 @@
 const Model = require("./Model");
 
 module.exports = class User extends Model {
-  constructor(firstName, lastName, username, password) {
+  constructor(firstName = "", lastName = "", username = "", password = "") {
+    super("user");
+    console.log("1");
+
     this.table = "user";
     this.fillable = ["first_name", "last_name", "user_name", "password"];
 
