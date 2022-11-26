@@ -56,6 +56,9 @@ router.post("/team", () => TeamController.create);
 // get Team Members
 router.get("/team/:id/members", () => TeamController.getMembers);
 
+// add Team Members
+router.post("/team/:id/members", () => TeamController.addMembers);
+
 // get Team Information
 router.get("/team/:id", () => TeamController.get);
 
