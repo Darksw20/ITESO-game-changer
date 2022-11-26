@@ -1,6 +1,4 @@
-const Controller = require("./controller");
-
-module.exports = class TeamController extends Controller {
+module.exports = class TeamController {
   constructor() {}
 
   create(req, res, next) {

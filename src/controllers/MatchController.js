@@ -1,6 +1,4 @@
-const Controller = require("./controller");
-
-module.exports = class MatchController extends Controller {
+module.exports = class MatchController {
   constructor() {}
 
   create(req, res, next) {

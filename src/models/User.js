@@ -1,4 +1,6 @@
-export class User extends Model {
+const Model = require("./Model");
+
+module.exports = class User extends Model {
   constructor(firstName, lastName, username, password) {
     this.table = "user";
     this.fillable = ["first_name", "last_name", "user_name", "password"];
@@ -9,4 +11,4 @@ export class User extends Model {
     this.username = username;
     this.password = password;
   }
-}
+};

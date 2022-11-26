@@ -1,6 +1,4 @@
-const Controller = require("./controller");
-
-module.exports = class UserController extends Controller {
+module.exports = class UserController {
   constructor() {}
 
   create(req, res, next) {

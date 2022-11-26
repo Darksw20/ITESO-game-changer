@@ -1,4 +1,6 @@
-export class Event extends Model {
+const Model = require("./Model");
+
+module.exports = class Event extends Model {
   constructor(name, startDate, endDate, ubication) {
     this.table = "event";
     this.fillable = ["name", "startDate", "endDate", "ubication"];
@@ -8,4 +10,4 @@ export class Event extends Model {
     this.endDate = endDate;
     this.ubication = ubication;
   }
-}
+};

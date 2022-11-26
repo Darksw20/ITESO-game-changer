@@ -1,4 +1,6 @@
-export class Match extends Model {
+const Model = require("./Model");
+
+module.exports = class Match extends Model {
   constructor(time, place, score) {
     this.table = "match";
     this.fillable = ["time", "place", "score"];
@@ -7,4 +9,4 @@ export class Match extends Model {
     this.place = place;
     this.score = score;
   }
-}
+};

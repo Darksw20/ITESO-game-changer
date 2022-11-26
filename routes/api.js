@@ -14,11 +14,14 @@ router.get("/hello", function (req, res, next) {
 // login
 router.post("/auth", () => AuthController.login);
 
+// login
+router.post("/auth", () => AuthController.logout);
+
 // register User
 router.post("/user", () => UserController.create);
 
 // get User info
-router.get("/user/:id", () => UserController.getInfo);
+router.get("/user/:id", () => UserController.get);
 
 // modify User info
 router.patch("/user/:id", () => UserController.update);
@@ -30,7 +33,10 @@ router.delete("/user/:id", () => UserController.delete);
 router.post("/event", () => EventController.create);
 
 // get Events
-router.get("/event", () => EventController.getInfo);
+router.get("/event", () => EventController.list);
+
+// get Events
+router.get("/event/:id", () => EventController.get);
 
 // modify Event
 router.patch("/event/:id", () => EventController.update);
@@ -38,28 +44,37 @@ router.patch("/event/:id", () => EventController.update);
 // delete Event
 router.delete("/event/:id", () => EventController.delete);
 
-// register Team
-router.post("/team", () => TeamController.create);
-
 // get Teams per Event
-router.get("/event/:id/team", () => EventController.getTeams);
-
-// get Team Participants
-router.get("/team/:id/members", () => TeamController.getMembers);
-
-// get Team Information
-router.get("/team/:id", () => TeamController.getInfo);
-
-// register Match
-router.post("/match", () => MatchController.create);
+router.get("/event/:id/teams", () => EventController.getTeams);
 
 // get Matches per event
 router.get("/event/:id/matches", () => EventController.getMatches);
 
+// register Team
+router.post("/team", () => TeamController.create);
+
+// get Team Members
+router.get("/team/:id/members", () => TeamController.getMembers);
+
+// get Team Information
+router.get("/team/:id", () => TeamController.get);
+
+// delete Team
+router.delete("/team/:id", () => TeamController.delete);
+
+// delete Team Member
+router.delete("/team/:id/members", () => TeamController.deleteMember);
+
+// register Match
+router.post("/match", () => MatchController.create);
+
 // get Match info
-router.get("/match/:id", () => MatchController.getInfo);
+router.get("/match/:id", () => MatchController.get);
 
 // modify Match
 router.patch("/match/:id", () => MatchController.update);
+
+// delete Match
+router.delete("/match/:id", () => MatchController.delete);
 
 module.exports = router;

@@ -1,4 +1,6 @@
-export class Team extends Model {
+const Model = require("./Model");
+
+module.exports = class Team extends Model {
   constructor(name, memberSize) {
     this.table = "team";
     this.fillable = ["name", "member_size"];
@@ -6,4 +8,4 @@ export class Team extends Model {
     this.name = name;
     this.memberSize = memberSize;
   }
-}
+};

@@ -1,10 +1,12 @@
-const Controller = require("./controller");
+const { Event } = require("../models/Event");
+const { Team } = require("../models/Team");
 
-module.exports = class EventController extends Controller {
+module.exports = class EventController {
   constructor() {}
 
   create(req, res, next) {
-    res.send("respond with a resource");
+    const newEvent = Event.create(res.body);
+    res.send(newEvent);
   }
 
   getInfo(req, res, next) {
@@ -12,7 +14,10 @@ module.exports = class EventController extends Controller {
   }
 
   getTeams(req, res, next) {
-    res.send("respond with a resource");
+    const eventId = req.params.id;
+    const event = Event.get(eventId);
+    const teams = Team.getList(event);
+    res.send(teams);
   }
 
   getMatches(req, res, next) {
