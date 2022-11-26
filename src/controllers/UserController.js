@@ -3,19 +3,14 @@ const User = require("../models/User");
 module.exports = class UserController {
   constructor() {}
 
-  create(req, res, next) {
+  async create(req, res, next) {
     const data = req.body;
-    // const user = new User();
-    // const result = user.create(data);
-    console.log(data);
+    const user = new User(data);
+    console.log(user.toObject());
     res.json({
       status: 200,
       message: "User created successfully",
-      data: {
-        id: 1,
-        email: "juan.perez@iteso.mx",
-        fullname: "Juan Perez",
-      },
+      data: user.toObject(),
     });
   }
 

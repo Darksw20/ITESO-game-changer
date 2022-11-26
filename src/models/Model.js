@@ -28,15 +28,19 @@ module.exports = class Model {
     console.log("delete", sql);
     return await this.db.query(sql, [id]);
   }
+  filter(data, mask) {
+    const filterData = Object.keys(data).reduce((results, property) => {
+      if (mask.includes(property)) results[property] = data[property];
+      return results;
+    }, []);
+    return filterData;
+  }
 };
 
 const QueryBuilder = {
   save: (table, data) => {
-    const values = Object.keys(data)
-      .map((i, idx) => `$${idx + 1}`)
-      .join(",");
     const keys = Object.keys(data).join(",");
-    return `INSERT INTO ${table} (${keys}) VALUES (${values})`;
+    return `INSERT INTO ${table} (${keys}) VALUES (?)`;
   },
   filter: (table, { columns, where }) => {
     let conditions = "";

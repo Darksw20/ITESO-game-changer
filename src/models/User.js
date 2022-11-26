@@ -1,16 +1,23 @@
 const Model = require("./Model");
 
 module.exports = class User extends Model {
-  constructor(firstName = "", lastName = "", username = "", password = "") {
+  constructor(data) {
     super("user");
 
     this.table = "user";
     this.fillable = ["first_name", "last_name", "user_name", "password"];
+    this.create(this.filter(data, this.fillable)).then((user) => {
+      this.lastName = user.last_name;
+      this.firstName = user.first_name;
+      this.username = user.username;
+    });
+  }
 
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.fullName = `${firstName} ${lastName}`;
-    this.username = username;
-    this.password = password;
+  toObject() {
+    return {
+      lastName: this.lastName,
+      firstName: this.firstName,
+      username: this.username,
+    };
   }
 };
