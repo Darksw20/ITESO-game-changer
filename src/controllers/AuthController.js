@@ -7,7 +7,7 @@ module.exports = class AuthController {
       message: "Authentication successfull",
       data: {
         email: "juan.perez@iteso.mx",
-        password: "Pruebas123456",
+        fullname: "Juan Perez",
       },
     });
   }

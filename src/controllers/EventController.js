@@ -61,10 +61,29 @@ module.exports = class EventController {
   }
 
   getTeams(req, res, next) {
-    const eventId = req.params.id;
-    const event = Event.get(eventId);
-    const teams = Team.getList(event);
-    res.json(teams);
+    res.json({
+      status: 200,
+      message: "Teams in event",
+      data: {
+        teams: [
+          {
+            id: 1,
+            name: "Linces1",
+            memberSize: 3,
+          },
+          {
+            id: 2,
+            name: "Linces2",
+            memberSize: 3,
+          },
+          {
+            id: 3,
+            name: "Linces3",
+            memberSize: 3,
+          },
+        ],
+      },
+    });
   }
 
   getMatches(req, res, next) {
