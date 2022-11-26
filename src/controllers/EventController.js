@@ -5,6 +5,8 @@ module.exports = class EventController {
   constructor() {}
 
   create(req, res, next) {
+    const data = req.body;
+    console.log(data);
     res.json({
       status: 200,
       message: "Event Created",
@@ -18,6 +20,8 @@ module.exports = class EventController {
   }
 
   get(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Event Found",
@@ -31,6 +35,7 @@ module.exports = class EventController {
   }
 
   list(req, res, next) {
+    console.log("list");
     res.json({
       status: 200,
       message: "Event list found",
@@ -61,6 +66,8 @@ module.exports = class EventController {
   }
 
   getTeams(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Teams in event",
@@ -87,6 +94,8 @@ module.exports = class EventController {
   }
 
   getMatches(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Matches found",
@@ -126,6 +135,9 @@ module.exports = class EventController {
   }
 
   update(req, res, next) {
+    const path = req.params;
+    const data = req.body;
+    console.log(path, data);
     res.json({
       status: 200,
       message: "Event Updated",
@@ -139,6 +151,8 @@ module.exports = class EventController {
   }
 
   delete(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Event deleted",

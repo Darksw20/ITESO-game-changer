@@ -2,6 +2,8 @@ module.exports = class TeamController {
   constructor() {}
 
   create(req, res, next) {
+    const data = req.body;
+    console.log(data);
     res.json({
       status: 200,
       message: "Team created sucessfully",
@@ -13,6 +15,8 @@ module.exports = class TeamController {
   }
 
   get(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Team Found",
@@ -25,6 +29,10 @@ module.exports = class TeamController {
   }
 
   addMembers(req, res, next) {
+    const path = req.params;
+    const data = req.body;
+
+    console.log(path, data);
     res.json({
       status: 200,
       message: "Team members added",
@@ -33,6 +41,9 @@ module.exports = class TeamController {
   }
 
   getMembers(req, res, next) {
+    const path = req.params;
+
+    console.log(path);
     res.json({
       status: 200,
       message: "Team members: ",
@@ -59,6 +70,8 @@ module.exports = class TeamController {
   }
 
   deleteMember(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Team members deleted",
@@ -67,6 +80,9 @@ module.exports = class TeamController {
   }
 
   update(req, res, next) {
+    const path = req.params;
+    const data = req.body;
+    console.log(path, data);
     res.json({
       status: 200,
       message: "Team updated sucessfully",
@@ -77,6 +93,8 @@ module.exports = class TeamController {
   }
 
   delete(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Team deleted sucessfully",

@@ -2,6 +2,8 @@ module.exports = class MatchController {
   constructor() {}
 
   create(req, res, next) {
+    const data = req.body;
+    console.log(data);
     res.json({
       status: 200,
       message: "Match Created Successfully",
@@ -14,6 +16,8 @@ module.exports = class MatchController {
   }
 
   get(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Match Found",
@@ -28,6 +32,9 @@ module.exports = class MatchController {
   }
 
   update(req, res, next) {
+    const path = req.params;
+    const data = req.body;
+    console.log(path, data);
     res.json({
       status: 200,
       message: "Match Updated Successfully",
@@ -40,6 +47,8 @@ module.exports = class MatchController {
   }
 
   delete(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "Match delted successfully",

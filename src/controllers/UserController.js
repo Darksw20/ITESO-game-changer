@@ -5,9 +5,9 @@ module.exports = class UserController {
 
   create(req, res, next) {
     const data = req.body;
-    const user = new User();
-    const result = user.create(data);
-    console.log(data, user, result);
+    // const user = new User();
+    // const result = user.create(data);
+    console.log(data);
     res.json({
       status: 200,
       message: "User created successfully",
@@ -20,6 +20,8 @@ module.exports = class UserController {
   }
 
   get(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "User Found",
@@ -31,6 +33,9 @@ module.exports = class UserController {
   }
 
   update(req, res, next) {
+    const path = req.params;
+    const data = req.body;
+    console.log(path, data);
     res.json({
       status: 200,
       message: "User Updated Sucessfully",
@@ -42,6 +47,8 @@ module.exports = class UserController {
   }
 
   delete(req, res, next) {
+    const path = req.params;
+    console.log(path);
     res.json({
       status: 200,
       message: "User Deleted Successfully",

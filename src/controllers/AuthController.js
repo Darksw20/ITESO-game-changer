@@ -2,6 +2,8 @@ module.exports = class AuthController {
   constructor() {}
 
   login(req, res, next) {
+    const data = req.body;
+    console.log(data);
     res.json({
       status: 200,
       message: "Authentication successfull",
@@ -13,6 +15,8 @@ module.exports = class AuthController {
   }
 
   logout(req, res, next) {
+    const data = req.body;
+    console.log(data);
     res.json({
       status: 200,
       message: "Logout successfull",
