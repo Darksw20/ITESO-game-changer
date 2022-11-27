@@ -1,7 +1,7 @@
 const Model = require("./Model");
 
 module.exports = class Event extends Model {
-  constructor(name, startDate, endDate, ubication) {
+  constructor() {
     super("event", ["name", "startDate", "endDate", "ubication"]);
   }
   toObject() {
