@@ -6,84 +6,59 @@ const MatchController = require("../src/controllers/MatchController");
 const TeamController = require("../src/controllers/TeamController");
 const UserController = require("../src/controllers/UserController");
 
-const Auth = new AuthController();
-const User = new UserController();
-const Event = new EventController();
-const Match = new MatchController();
-const Team = new TeamController();
-
 /* GET users listing. */
 router.get("/hello", function (req, res, next) {
   res.send("respond with a resource");
 });
 
 // login
-router.post("/auth", () => Auth.login);
-
-// login
-router.post("/auth", () => Auth.logout);
-
+router.post("/auth",  AuthController.login);
 // register User
-router.post("/user", User.create);
+router.post("/user",  UserController.create);
 
 // get User info
-router.get("/user/:id", () => User.get);
+router.get("/user/:id",  UserController.getInfo);
 
 // modify User info
-router.patch("/user/:id", () => User.update);
+router.patch("/user/:id",  UserController.update);
 
 //delete User
-router.delete("/user/:id", () => User.delete);
+router.delete("/user/:id",  UserController.delete);
 
 // register Event
-router.post("/event", () => Event.create);
+router.post("/event",  EventController.create);
 
 // get Events
-router.get("/event", () => Event.list);
-
-// get Events
-router.get("/event/:id", () => Event.get);
+router.get("/event",  EventController.getInfo);
 
 // modify Event
-router.patch("/event/:id", () => Event.update);
+router.patch("/event/:id",  EventController.update);
 
 // delete Event
-router.delete("/event/:id", () => Event.delete);
-
-// get Teams per Event
-router.get("/event/:id/teams", () => Event.getTeams);
-
-// get Matches per event
-router.get("/event/:id/matches", () => Event.getMatches);
+router.delete("/event/:id",  EventController.delete);
 
 // register Team
-router.post("/team", () => Team.create);
+router.post("/team",  TeamController.create);
 
-// get Team Members
-router.get("/team/:id/members", () => Team.getMembers);
+// get Teams per Event
+router.get("/event/:id/team",  EventController.getTeams);
 
-// add Team Members
-router.post("/team/:id/members", () => Team.addMembers);
+// get Team Participants
+router.get("/team/:id/members",  TeamController.getMembers);
 
 // get Team Information
-router.get("/team/:id", () => Team.get);
-
-// delete Team
-router.delete("/team/:id", () => Team.delete);
-
-// delete Team Member
-router.delete("/team/:id/members", () => Team.deleteMember);
+router.get("/team/:id",  TeamController.getInfo);
 
 // register Match
-router.post("/match", () => Match.create);
+router.post("/match",  MatchController.create);
+
+// get Matches per event
+router.get("/event/:id/matches",  EventController.getMatches);
 
 // get Match info
-router.get("/match/:id", () => Match.get);
+router.get("/match/:id",  MatchController.getInfo);
 
 // modify Match
-router.patch("/match/:id", () => Match.update);
-
-// delete Match
-router.delete("/match/:id", () => Match.delete);
+router.patch("/match/:id",  MatchController.update);
 
 module.exports = router;
