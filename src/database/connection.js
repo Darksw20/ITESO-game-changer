@@ -25,7 +25,7 @@ module.exports = class Connection {
   query(query = "", params = []) {
     return new Promise((resolve, reject) => {
       if (params.length > 0) {
-        this.con.query(query, params, (err, result, fields) => {
+        this.con.query(query, [params], (err, result, fields) => {
           if (err) throw err;
           resolve(result);
         });
