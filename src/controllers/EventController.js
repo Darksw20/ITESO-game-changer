@@ -1,67 +1,44 @@
-const { Event } = require("../models/Event");
+const Event = require("../models/Event");
 const { Team } = require("../models/Team");
 
 module.exports = class EventController {
   constructor() {}
 
-  create(req, res, next) {
+  async create(req, res, next) {
     const data = req.body;
-    console.log(data);
+    const event = new Event();
+    const response = await event.create(Event.filter(data, event.fillable));
+
+    const [eventResponse] = await event.get({
+      where: { id: response.insertId },
+    });
     res.json({
       status: 200,
       message: "Event Created",
-      data: {
-        name: "Evento 1",
-        startDate: "2022-11-26T01:43:48",
-        endDate: "2022-11-26T02:43:48",
-        ubication: "Estadio Akron",
-      },
+      data: eventResponse,
     });
   }
 
-  get(req, res, next) {
+  async get(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const event = new Event();
+    const [eventResponse] = await event.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Event Found",
-      data: {
-        name: "Evento 1",
-        startDate: "2022-11-26T01:43:48",
-        endDate: "2022-11-26T02:43:48",
-        ubication: "Estadio Akron",
-      },
+      data: eventResponse,
     });
   }
 
-  list(req, res, next) {
-    console.log("list");
+  async list(req, res, next) {
+    const event = new Event();
+    const [eventResponse] = await event.get();
     res.json({
       status: 200,
       message: "Event list found",
-      data: [
-        {
-          id: 1,
-          name: "Evento 1",
-          startDate: "2022-11-26T01:43:48",
-          endDate: "2022-11-26T02:43:48",
-          ubication: "Estadio Akron",
-        },
-        {
-          id: 2,
-          name: "Evento 2",
-          startDate: "2022-11-26T01:43:48",
-          endDate: "2022-11-26T02:43:48",
-          ubication: "Estadio Akron",
-        },
-        {
-          id: 3,
-          name: "Evento 3",
-          startDate: "2022-11-26T01:43:48",
-          endDate: "2022-11-26T02:43:48",
-          ubication: "Estadio Akron",
-        },
-      ],
+      data: eventResponse,
     });
   }
 

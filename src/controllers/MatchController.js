@@ -1,33 +1,32 @@
+const Match = require("../models/Match");
 module.exports = class MatchController {
   constructor() {}
 
-  create(req, res, next) {
+  async create(req, res, next) {
     const data = req.body;
-    console.log(data);
+    const match = new Match();
+    const response = await match.create(Match.filter(data, match.fillable));
+
+    const [matchResponse] = await match.get({
+      where: { id: response.insertId },
+    });
     res.json({
       status: 200,
       message: "Match Created Successfully",
-      data: {
-        startTime: "2022-11-26T01:43:48",
-        endTime: "2022-11-27T01:43:48",
-        place: "cancha 1",
-      },
+      data: matchResponse,
     });
   }
 
-  get(req, res, next) {
+  async get(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const match = new Match();
+    const [matchResponse] = await match.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Match Found",
-      data: {
-        startTime: "2022-11-26T01:43:48",
-        location: "cancha 2",
-        team1: "Chivas",
-        team2: "Atlas",
-        event: "Torneo Interno",
-      },
+      data: matchResponse,
     });
   }
 

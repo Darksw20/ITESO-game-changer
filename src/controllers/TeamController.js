@@ -1,30 +1,33 @@
+const Team = require("../models/Team");
 module.exports = class TeamController {
   constructor() {}
 
-  create(req, res, next) {
+  async create(req, res, next) {
     const data = req.body;
-    console.log(data);
+    const team = new Team();
+    const response = await team.create(Team.filter(data, team.fillable));
+
+    const [teamResponse] = await team.get({
+      where: { id: response.insertId },
+    });
     res.json({
       status: 200,
       message: "Team created sucessfully",
-      data: {
-        id: 123,
-        teamName: "Chivas",
-      },
+      data: teamResponse,
     });
   }
 
-  get(req, res, next) {
+  async get(req, res, next) {
     const path = req.params;
+    const team = new Team();
+    const [teamResponse] = await team.get({
+      where: path,
+    });
     console.log(path);
     res.json({
       status: 200,
       message: "Team Found",
-      data: {
-        id: 123,
-        teamName: "Chivas",
-        memberSize: 3,
-      },
+      data: teamResponse,
     });
   }
 
