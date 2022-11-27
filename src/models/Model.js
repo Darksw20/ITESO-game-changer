@@ -1,7 +1,8 @@
 const Connection = require("../database/connection");
 module.exports = class Model {
-  constructor(table) {
+  constructor(table, fillable) {
     this.table = table;
+    this.fillable = fillable;
     this.db = new Connection();
   }
 
@@ -20,7 +21,7 @@ module.exports = class Model {
   async update(data, where) {
     const sql = QueryBuilder.update(this.table, data, where);
     console.log("update", sql);
-    return await this.db.query(sql, Object.values(data));
+    return await this.db.query(sql, data);
   }
 
   async delete(id) {
@@ -28,18 +29,23 @@ module.exports = class Model {
     console.log("delete", sql);
     return await this.db.query(sql, [id]);
   }
+  static filter(data, mask) {
+    const filterData = Object.keys(data).reduce((results, property) => {
+      if (mask.includes(property)) results[property] = data[property];
+      return results;
+    }, []);
+    return filterData;
+  }
 };
 
 const QueryBuilder = {
   save: (table, data) => {
-    const values = Object.keys(data)
-      .map((i, idx) => `$${idx + 1}`)
-      .join(",");
     const keys = Object.keys(data).join(",");
-    return `INSERT INTO ${table} (${keys}) VALUES (${values})`;
+    return `INSERT INTO ${table} (${keys}) VALUES (?)`;
   },
   filter: (table, { columns, where }) => {
     let conditions = "";
+
     if (where) {
       const conditionKeys = Object.keys(where);
       const conditionValues = Object.values(where).map((value) =>
@@ -69,7 +75,7 @@ const QueryBuilder = {
   },
   update: (table, data, where) => {
     let conditions = "";
-    let update = "";
+    let updater = "";
 
     if (where) {
       const conditionKeys = Object.keys(where);
@@ -84,9 +90,11 @@ const QueryBuilder = {
     }
 
     if (data) {
-      const dataKey = Object.keys(data);
-      dataKey.forEach((key, index) => {
-        updater += `${key} = $${index + 1}`;
+      const formattedData = Object.entries(data);
+      formattedData.forEach(([key, val], index) => {
+        updater += `${key} = ${typeof val === "string" ? `'${val}'` : val}${
+          index === formattedData.length - 1 ? "" : " , "
+        }`;
       });
     }
     let query = `UPDATE ${table} SET ${updater} `;

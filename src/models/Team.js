@@ -1,12 +1,13 @@
 const Model = require("./Model");
 
 module.exports = class Team extends Model {
-  constructor(name, memberSize) {
-    super();
-    this.table = "team";
-    this.fillable = ["name", "member_size"];
-
-    this.name = name;
-    this.memberSize = memberSize;
+  constructor() {
+    super("team", ["name", "member_size"]);
+  }
+  toObject() {
+    return {
+      name: this.name,
+      memberSize: this.memberSize,
+    };
   }
 };
