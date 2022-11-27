@@ -6,7 +6,13 @@ module.exports = class UserController {
   async create(req, res, next) {
     const data = req.body;
     const user = new User();
-    const response = await user.create(User.filter(data, user.fillable));
+    const filtered = User.filter(data, user.fillable);
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+    const response = await user.create(filtered);
 
     const [userResponse] = await user.get({
       where: { id: response.insertId },
@@ -24,6 +30,12 @@ module.exports = class UserController {
     const [userResponse] = await user.get({
       where: path,
     });
+    if (!userResponse)
+      res.json({
+        status: 422,
+        message: "User not Found",
+        error: [],
+      });
     res.json({
       status: 200,
       message: "User Found",
@@ -35,7 +47,13 @@ module.exports = class UserController {
     const path = req.params;
     const data = req.body;
     const user = new User();
-    await user.update(User.filter(data, user.fillable), path);
+    const filtered = User.filter(data, user.fillable);
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+    await user.update(filtered, path);
     const [userResponse] = await user.get({
       where: path,
     });

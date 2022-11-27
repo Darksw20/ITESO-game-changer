@@ -1,7 +1,8 @@
 const Connection = require("../database/connection");
 module.exports = class Model {
-  constructor(table) {
+  constructor(table, fillable) {
     this.table = table;
+    this.fillable = fillable;
     this.db = new Connection();
   }
 

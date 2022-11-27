@@ -5,7 +5,15 @@ module.exports = class TeamController {
   async create(req, res, next) {
     const data = req.body;
     const team = new Team();
-    const response = await team.create(Team.filter(data, team.fillable));
+    const filtered = Team.filter(data, team.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+
+    const response = await team.create(filtered);
 
     const [teamResponse] = await team.get({
       where: { id: response.insertId },
@@ -82,26 +90,39 @@ module.exports = class TeamController {
     });
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     const path = req.params;
     const data = req.body;
-    console.log(path, data);
+    const team = new Team();
+    const filtered = Team.filter(data, team.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+
+    await team.update(filtered, path);
+    const [teamResponse] = await team.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Team updated sucessfully",
-      data: {
-        teamName: "Chivas",
-      },
+      data: teamResponse,
     });
   }
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const team = new Team();
+    await team.delete(path.id);
     res.json({
       status: 200,
       message: "Team deleted sucessfully",
-      data: {},
+      data: {
+        id: path.id,
+      },
     });
   }
 };

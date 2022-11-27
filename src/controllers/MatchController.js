@@ -5,7 +5,15 @@ module.exports = class MatchController {
   async create(req, res, next) {
     const data = req.body;
     const match = new Match();
-    const response = await match.create(Match.filter(data, match.fillable));
+    const filtered = Match.filter(data, match.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+
+    const response = await match.create(filtered);
 
     const [matchResponse] = await match.get({
       where: { id: response.insertId },
@@ -30,28 +38,38 @@ module.exports = class MatchController {
     });
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     const path = req.params;
     const data = req.body;
-    console.log(path, data);
+    const match = new Match();
+    const filtered = Match.filter(data, match.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+    await match.update(filtered, path);
+    const [matchResponse] = await match.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Match Updated Successfully",
-      data: {
-        startTime: "2022-11-26T01:43:48",
-        endTime: "2022-11-27T01:43:48",
-        place: "cancha 1",
-      },
+      data: matchResponse,
     });
   }
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const match = new Match();
+    await match.delete(path.id);
     res.json({
       status: 200,
       message: "Match delted successfully",
-      data: {},
+      data: {
+        id: path.id,
+      },
     });
   }
 };

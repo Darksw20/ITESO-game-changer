@@ -7,7 +7,15 @@ module.exports = class EventController {
   async create(req, res, next) {
     const data = req.body;
     const event = new Event();
-    const response = await event.create(Event.filter(data, event.fillable));
+    const filtered = Event.filter(data, event.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+
+    const response = await event.create(filtered);
 
     const [eventResponse] = await event.get({
       where: { id: response.insertId },
@@ -42,9 +50,13 @@ module.exports = class EventController {
     });
   }
 
-  getTeams(req, res, next) {
+  async getTeams(req, res, next) {
     const path = req.params;
     console.log(path);
+    const event = new Event();
+    const [eventResponse] = await event.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Teams in event",
@@ -70,7 +82,7 @@ module.exports = class EventController {
     });
   }
 
-  getMatches(req, res, next) {
+  async getMatches(req, res, next) {
     const path = req.params;
     console.log(path);
     res.json({
@@ -111,29 +123,40 @@ module.exports = class EventController {
     });
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     const path = req.params;
     const data = req.body;
-    console.log(path, data);
+    const event = new Event();
+    const filtered = Event.filter(data, event.fillable);
+
+    if (!filtered.length)
+      res.json({
+        status: 422,
+        message: "No valid parameters",
+      });
+
+    await event.update(filtered, path);
+
+    const [eventResponse] = await event.get({
+      where: path,
+    });
     res.json({
       status: 200,
       message: "Event Updated",
-      data: {
-        name: "Evento 1",
-        startDate: "2022-11-26T01:43:48",
-        endDate: "2022-11-26T02:43:48",
-        ubication: "Estadio Akron",
-      },
+      data: eventResponse,
     });
   }
 
-  delete(req, res, next) {
+  async delete(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const event = new Event();
+    await event.delete(path.id);
     res.json({
       status: 200,
       message: "Event deleted",
-      data: {},
+      data: {
+        id: path.id,
+      },
     });
   }
 };
