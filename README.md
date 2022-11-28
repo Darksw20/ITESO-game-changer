@@ -4,18 +4,39 @@ A simple and also very complex tournament automatic diagramer.
 
 Para instalar
 
-mkdir //create folder game-changer
+//create folder game-changer
+mkdir
 
-cd game-changer //open the folder
+//open the folder
+cd game-changer
 
-git clone git@github.com:Darksw20/game-changer-front.git //clone game-changer-back
+//clone game-changer-back
+git clone git@github.com:Darksw20/game-changer-front.git
 
 // manual copy the next files .back.env .env and docker-compose.yml
 
-docker-compose build --no-cache //Run docker-compose build --no-cache to build the images
+//Run docker-compose build --no-cache to build the images
+docker-compose build --no-cache
 
-docker-compose up //Run docker-compose up to run the instances
+//Run docker-compose up to run the instances
+docker-compose up
 
-npm run migrate // To create the database model (When the console print Done migrations is ready the database)
+//Open the mysql container
+docker exec -it game-changer-mysql-1 bash
+
+//open the mysql app and authenticate using the .env data
+mysql -uroot -p
+
+//create the database
+CREATE DATABASE game_changer;
+
+//to be sure the dabase works open the database
+USE game_changer
+
+//and check the tables
+SHOW TABLES
+
+// To create the database model (When the console print Done migrations is ready the database)
+npm run migrate
 
 //start developing

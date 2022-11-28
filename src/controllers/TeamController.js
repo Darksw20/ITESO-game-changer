@@ -7,7 +7,7 @@ module.exports = class TeamController {
     const team = new Team();
     const filtered = Team.filter(data, team.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",
@@ -96,7 +96,7 @@ module.exports = class TeamController {
     const team = new Team();
     const filtered = Team.filter(data, team.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",

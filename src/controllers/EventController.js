@@ -9,7 +9,7 @@ module.exports = class EventController {
     const event = new Event();
     const filtered = Event.filter(data, event.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",
@@ -129,7 +129,7 @@ module.exports = class EventController {
     const event = new Event();
     const filtered = Event.filter(data, event.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",
