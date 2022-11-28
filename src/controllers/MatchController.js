@@ -7,7 +7,7 @@ module.exports = class MatchController {
     const match = new Match();
     const filtered = Match.filter(data, match.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",
@@ -44,7 +44,7 @@ module.exports = class MatchController {
     const match = new Match();
     const filtered = Match.filter(data, match.fillable);
 
-    if (!filtered.length)
+    if (filtered.length)
       res.json({
         status: 422,
         message: "No valid parameters",

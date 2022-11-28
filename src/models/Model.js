@@ -36,6 +36,10 @@ module.exports = class Model {
     }, []);
     return filterData;
   }
+
+  static hash(string = "") {
+    return require("crypto").createHash("md5").update(string).digest("hex");
+  }
 };
 
 const QueryBuilder = {

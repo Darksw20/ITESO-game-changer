@@ -6,7 +6,6 @@ const MatchController = require("../src/controllers/MatchController");
 const TeamController = require("../src/controllers/TeamController");
 const UserController = require("../src/controllers/UserController");
 
-
 const Auth = new AuthController();
 const User = new UserController();
 const Event = new EventController();
@@ -20,7 +19,7 @@ router.post("/auth", Auth.login);
 router.post("/logout", Auth.logout);
 
 // register User
-router.post("/user",  UserController.create);
+router.post("/user", User.create);
 
 // get User info
 

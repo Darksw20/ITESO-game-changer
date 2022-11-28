@@ -1,16 +1,17 @@
+const User = require("../models/User");
+
 module.exports = class AuthController {
   constructor() {}
 
-  login(req, res, next) {
+  async login(req, res, next) {
     const data = req.body;
-    console.log(data);
-    res.json({
+    const user = new User();
+    const response = await user.isValidPassword(data);
+    console.log(response);
+    return res.status(200).json({
       status: 200,
-      message: "Authentication successfull",
-      data: {
-        email: "juan.perez@iteso.mx",
-        fullname: "Juan Perez",
-      },
+      message: `Authentication ${response ? "successfull" : "failed"}`,
+      data: response,
     });
   }
 
