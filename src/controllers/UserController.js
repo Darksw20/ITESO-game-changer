@@ -7,8 +7,8 @@ module.exports = class UserController {
     const data = req.body;
     const user = new User();
     const filtered = User.filter(data, user.fillable);
-    if (!filtered.length)
-      res.json({
+    if (filtered.length)
+      return res.status(422).json({
         status: 422,
         message: "No valid parameters",
       });
@@ -17,7 +17,7 @@ module.exports = class UserController {
     const [userResponse] = await user.get({
       where: { id: response.insertId },
     });
-    res.json({
+    res.status(200).json({
       status: 200,
       message: "User created successfully",
       data: userResponse,
@@ -31,12 +31,12 @@ module.exports = class UserController {
       where: path,
     });
     if (!userResponse)
-      res.json({
+      return res.status(422).json({
         status: 422,
         message: "User not Found",
         error: [],
       });
-    res.json({
+    return res.status(200).json({
       status: 200,
       message: "User Found",
       data: userResponse,
@@ -48,8 +48,8 @@ module.exports = class UserController {
     const data = req.body;
     const user = new User();
     const filtered = User.filter(data, user.fillable);
-    if (!filtered.length)
-      res.json({
+    if (filtered.length)
+      return res.status(422).json({
         status: 422,
         message: "No valid parameters",
       });
@@ -57,7 +57,7 @@ module.exports = class UserController {
     const [userResponse] = await user.get({
       where: path,
     });
-    res.json({
+    return res.status(200).json({
       status: 200,
       message: "User Updated Sucessfully",
       data: userResponse,
@@ -68,7 +68,7 @@ module.exports = class UserController {
     const path = req.params;
     const user = new User();
     await user.delete(path.id);
-    res.json({
+    return res.status(200).json({
       status: 200,
       message: "User Deleted Successfully",
       data: {

@@ -1,7 +1,7 @@
 const up = async (db) => {
   console.log("up001");
   await db.query(
-    `CREATE TABLE user( id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(255), last_name VARCHAR(255), username VARCHAR(255), password VARCHAR(255),fk_team INT, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )`
+    `CREATE TABLE user( id INT NOT NULL AUTO_INCREMENT, email VARCHAR(255), first_name VARCHAR(255), last_name VARCHAR(255), username VARCHAR(255), password VARCHAR(255),fk_team INT, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )`
   );
   await db.query(
     `CREATE TABLE team( id INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), member_size int, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )`
