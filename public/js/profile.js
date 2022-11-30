@@ -1,5 +1,5 @@
-function updateAttempt(){
-    var data = JSON.stringify({
+const updateAttempt= async() =>{
+    var payload = JSON.stringify({
         "displayName": $("#displayName").val(),
         "location": $("#location").val(),
         "favoriteSport":$("#favoriteSport").val()
@@ -11,16 +11,16 @@ function updateAttempt(){
         headers: { 
           'Content-Type': 'application/json'
         },
-        data : data
+        data : payload
       };
-      
-      
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+      try{
+        const{status,data:{data}} = await axios(config)
+          if(status!=200){
+            console.error("Error en la llamada");
+            return;
+          }
+      }catch(error){
+        console.log(error);
+      };
 
 }

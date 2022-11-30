@@ -1,20 +1,29 @@
 <div class="container">
   <div class="container-fluid">
     <form class="d-flex" role="search">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-search />
+      <button class="btn btn-outline-success" type="submit" >Search</button>
     </form>
   </div>
   <div>
-    {{> eventrow}}
-    {{> eventrow}}
-    {{> eventrow}}
-    {{> eventrow}}
 
+    <div class="event-cards" data-event-cards-container>
+      <template data-event-template>
+        <div class="event-row">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title" data-title></h5>
+                  <p class="card-text" data-text></p>
+                  <a href="{{href}}" class="btn btn-primary">{{button}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      
+    </div>
   </div>
 </div>

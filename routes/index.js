@@ -48,6 +48,14 @@ router.get("/search", function (req, res, next) {
     title: "Search Event",
     template: "template search-template",
     search: "active",
+    events: [ 
+      {
+        title: "Card1",
+        text: "With supporting text below as a natural lead-in to additional content.",
+        button: "Go somewhere",
+        href: "#"
+      }
+    ]
   });
 });
 
