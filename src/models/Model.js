@@ -6,7 +6,7 @@ module.exports = class Model {
     this.db = new Connection();
   }
 
-  async get(data) {
+  async get(data={colunm:null,where:null}) {
     const sql = QueryBuilder.filter(this.table, data);
     console.log("get", sql);
     return await this.db.query(sql);
