@@ -51,7 +51,4 @@ const registerAttempt= async() =>{
   }catch(error){
     console.log(error);
   };
- 
 }
-
-

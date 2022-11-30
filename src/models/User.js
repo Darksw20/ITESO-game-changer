@@ -12,13 +12,6 @@ module.exports = class User extends Model {
     ]);
   }
 
-  async isValidPassword({ email, password }) {
-    const response = await this.get({
-      where: { email, password },
-    });
-    return response.length > 0;
-  }
-
   toObject() {
     return {
       lastName: this.lastName,
