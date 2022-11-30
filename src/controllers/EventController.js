@@ -42,7 +42,8 @@ module.exports = class EventController {
 
   async list(req, res, next) {
     const event = new Event();
-    const [eventResponse] = await event.get();
+    const eventResponse = await event.get({});
+    console.log(eventResponse);
     res.json({
       status: 200,
       message: "Event list found",
