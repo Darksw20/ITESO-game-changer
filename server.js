@@ -6,6 +6,7 @@
 require("dotenv").config();
 const app = require("./app");
 const http = require("http");
+const { con } = require("./src/database/connection");
 
 /**
  * Normalize a port into a number, string, or false.

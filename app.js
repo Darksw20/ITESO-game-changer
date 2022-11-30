@@ -5,7 +5,7 @@ const logger = require("morgan");
 const { engine } = require("express-handlebars");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const apiRouter = require("./routes/api");
 
 const app = express();
 
@@ -30,6 +30,6 @@ app.engine(
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api", apiRouter);
 
 module.exports = app;
