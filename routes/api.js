@@ -20,7 +20,7 @@ router.post("/auth", Auth.login);
 router.post("/logout", authUser, Auth.logout);
 
 // register User
-router.post("/user", authUser, User.create);
+router.post("/user", User.create);
 
 // get User info
 

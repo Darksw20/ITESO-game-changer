@@ -11,11 +11,16 @@ module.exports = class JWT {
   }
 
   static decode(token = ".") {
-    const base64Url = token.split(".")[1];
-    const buff = Buffer.from(base64Url, "base64");
-    const payloadinit = buff.toString("ascii");
-    const payload = JSON.parse(payloadinit);
-    return payload;
+    try {
+      const base64Url = token.split(".")[1];
+      const buff = Buffer.from(base64Url, "base64");
+      const payloadinit = buff.toString("ascii");
+      const payload = JSON.parse(payloadinit);
+      return payload;
+    } catch (e) {
+      console.error("Fallo de JWT");
+    }
+    return false;
   }
 
   verify(token) {
