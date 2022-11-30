@@ -5,6 +5,7 @@ const EventController = require("../src/controllers/EventController");
 const MatchController = require("../src/controllers/MatchController");
 const TeamController = require("../src/controllers/TeamController");
 const UserController = require("../src/controllers/UserController");
+const { authUser, authAdmin } = require("../src/middlewares/auth");
 
 const Auth = new AuthController();
 const User = new UserController();
@@ -16,73 +17,73 @@ const Team = new TeamController();
 router.post("/auth", Auth.login);
 
 // login
-router.post("/logout", Auth.logout);
+router.post("/logout", authUser, Auth.logout);
 
 // register User
-router.post("/user", User.create);
+router.post("/user", authUser, User.create);
 
 // get User info
 
-router.get("/user/:id", User.get);
+router.get("/user/:id", authUser, User.get);
 
 // modify User info
-router.patch("/user/:id", User.update);
+router.patch("/user/:id", authUser, User.update);
 
 //delete User
-router.delete("/user/:id", User.delete);
+router.delete("/user/:id", authUser, User.delete);
 
 // register Event
-router.post("/event", Event.create);
+router.post("/event", authUser, Event.create);
 
 // get Events
-router.get("/event", Event.list);
+router.get("/event", authUser, Event.list);
 
 // get Events
-router.get("/event/:id", Event.get);
+router.get("/event/:id", authUser, Event.get);
 
 // modify Event
-router.patch("/event/:id", Event.update);
+router.patch("/event/:id", authUser, Event.update);
 
 // delete Event
-router.delete("/event/:id", Event.delete);
+router.delete("/event/:id", authUser, Event.delete);
 
 // get Teams per Event
-router.get("/event/:id/teams", Event.getTeams);
+router.get("/event/:id/teams", authUser, Event.getTeams);
 
 // get Matches per event
-router.get("/event/:id/matches", Event.getMatches);
+router.get("/event/:id/matches", authUser, Event.getMatches);
 
 // register Team
-router.post("/team", Team.create);
+router.post("/team", authUser, Team.create);
 
 // get Team Members
-router.get("/team/:id/members", Team.getMembers);
+router.get("/team/:id/members", authUser, Team.getMembers);
 
 // add Team Members
-router.post("/team/:id/members", Team.addMembers);
+router.post("/team/:id/members", authUser, Team.addMembers);
 
 // get Team Information
-router.get("/team/:id", Team.get);
+router.get("/team/:id", authUser, Team.get);
 
 // modify Team
-router.patch("/team/:id", Team.update);
+router.patch("/team/:id", authUser, Team.update);
 
 // delete Team
-router.delete("/team/:id", Team.delete);
+router.delete("/team/:id", authUser, Team.delete);
 
 // delete Team Member
-router.delete("/team/:id/members", Team.deleteMember);
+router.delete("/team/:id/members", authUser, Team.deleteMember);
 
 // register Match
-router.post("/match", Match.create);
+router.post("/match", authUser, Match.create);
 
 // get Match info
-router.get("/match/:id", Match.get);
+router.get("/match/:id", authUser, Match.get);
 
 // modify Match
-router.patch("/match/:id", Match.update);
+router.patch("/match/:id", authUser, Match.update);
 
 // delete Match
-router.delete("/match/:id", Match.delete);
+router.delete("/match/:id", authUser, Match.delete);
 
 module.exports = router;
