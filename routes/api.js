@@ -24,7 +24,7 @@ router.post("/user", User.create);
 
 // get User info
 
-router.get("/user/:id", authUser, User.get);
+router.get("/user/:id", User.get);
 
 // modify User info
 router.patch("/user/:id", authUser, User.update);

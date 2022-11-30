@@ -14,8 +14,8 @@ module.exports = class AuthController {
       },
     });
     if (!response.length) {
-      return res.status(401).json({
-        status: 401,
+      return res.status(200).json({
+        status: 400,
         message: `Authentication failed`,
       });
     }
