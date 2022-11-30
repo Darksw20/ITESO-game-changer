@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const JWT = require("../services/JWT");
 
 module.exports = class AuthController {
   constructor() {}
@@ -6,12 +7,28 @@ module.exports = class AuthController {
   async login(req, res, next) {
     const data = req.body;
     const user = new User();
-    const response = await user.isValidPassword(data);
-    console.log(response);
+    const response = await user.get({
+      where: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    if (!response.length) {
+      return res.status(401).json({
+        status: 401,
+        message: `Authentication failed`,
+      });
+    }
     return res.status(200).json({
       status: 200,
-      message: `Authentication ${response ? "successfull" : "failed"}`,
-      data: response,
+      message: `Authentication successfull`,
+      data: {
+        validated: true,
+        jwt: JWT.encode({
+          id: response[0].id,
+          email: response[0].email,
+        }),
+      },
     });
   }
 
