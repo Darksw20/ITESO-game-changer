@@ -1,4 +1,5 @@
 const Team = require("../models/Team");
+const User = require("../models/User");
 module.exports = class TeamController {
   constructor() {}
 
@@ -6,7 +7,7 @@ module.exports = class TeamController {
     const data = req.body;
     const team = new Team();
     const filtered = Team.filter(data, team.fillable);
-
+    console.log(filtered);
     if (filtered.length)
       res.json({
         status: 422,
@@ -39,54 +40,54 @@ module.exports = class TeamController {
     });
   }
 
-  addMembers(req, res, next) {
+  async addMembers(req, res, next) {
     const path = req.params;
     const data = req.body;
+
+    const user = new User();
+    const addedMember = data.members.map((member) => {
+      user.update({ fk_team: path.id }, { id: member });
+      return member;
+    });
 
     console.log(path, data);
     res.json({
       status: 200,
       message: "Team members added",
-      data: {},
+      data: addedMember,
     });
   }
 
-  getMembers(req, res, next) {
+  async getMembers(req, res, next) {
     const path = req.params;
+    const user = new User();
+    const membersResponse = await user.get({
+      where: { fk_team: path.id },
+    });
 
-    console.log(path);
     res.json({
       status: 200,
       message: "Team members: ",
-      data: {
-        members: [
-          {
-            id: 1,
-            email: "juan.perez@iteso.mx",
-            fullname: "Juan Perez",
-          },
-          {
-            id: 2,
-            email: "juan.perez1@iteso.mx",
-            fullname: "Juan Perez",
-          },
-          {
-            id: 3,
-            email: "juan.perez2@iteso.mx",
-            fullname: "Juan Perez",
-          },
-        ],
-      },
+      data: membersResponse,
     });
   }
 
-  deleteMember(req, res, next) {
+  async deleteMember(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const user = new User();
+    const membersResponse = await user.get({
+      columns: ["id"],
+      where: { fk_team: path.id },
+    });
+    const delMember = membersResponse.map((member) => {
+      user.update({ fk_team: null }, { id: member.id });
+      console.log(member.id);
+      return member.id;
+    });
     res.json({
       status: 200,
-      message: "Team members deleted",
-      data: {},
+      message: "Team members out of the team",
+      data: delMember,
     });
   }
 

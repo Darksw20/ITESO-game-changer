@@ -14,8 +14,8 @@ module.exports = class User extends Model {
 
   toObject() {
     return {
-      lastName: this.lastName,
-      firstName: this.firstName,
+      last_name: this.last_name,
+      first_name: this.first_name,
       username: this.username,
     };
   }

@@ -1,5 +1,6 @@
 const Event = require("../models/Event");
-const { Team } = require("../models/Team");
+const Match = require("../models/Match");
+const Team = require("../models/Team");
 
 module.exports = class EventController {
   constructor() {}
@@ -55,72 +56,44 @@ module.exports = class EventController {
     const path = req.params;
     console.log(path);
     const event = new Event();
+    const match = new Match();
     const [eventResponse] = await event.get({
+      columns: ["id"],
       where: path,
     });
+    const matchResponse = await match.get({
+      columns: ["fk_team_home", "fk_team_away"],
+      where: { fk_event: eventResponse.id },
+    });
+    let teamsSet = new Set();
+    matchResponse.forEach((match) => {
+      teamsSet.add(match.fk_team_home);
+      teamsSet.add(match.fk_team_away);
+    });
+
     res.json({
       status: 200,
       message: "Teams in event",
-      data: {
-        teams: [
-          {
-            id: 1,
-            name: "Linces1",
-            memberSize: 3,
-          },
-          {
-            id: 2,
-            name: "Linces2",
-            memberSize: 3,
-          },
-          {
-            id: 3,
-            name: "Linces3",
-            memberSize: 3,
-          },
-        ],
-      },
+      data: [...teamsSet],
     });
   }
 
   async getMatches(req, res, next) {
     const path = req.params;
-    console.log(path);
+    const event = new Event();
+    const match = new Match();
+    const [eventResponse] = await event.get({
+      columns: ["id"],
+      where: path,
+    });
+    const matchResponse = await match.get({
+      where: { fk_event: eventResponse.id },
+    });
+    console.log(matchResponse);
     res.json({
       status: 200,
       message: "Matches found",
-      data: [
-        {
-          id: 1,
-          startTime: "2022-11-26T01:43:48",
-          endTime: "2022-11-26T01:43:48",
-          place: "Cancha 1",
-          nameHome: "Linces",
-          nameAway: "Cuervos",
-          scoreHome: 1,
-          scoreAway: 0,
-        },
-        {
-          id: 2,
-          startTime: "2022-11-26T01:43:48",
-          endTime: "2022-11-26T01:43:48",
-          place: "Cancha 1",
-          nameHome: "Linces",
-          nameAway: "Cuervos",
-          scoreHome: 1,
-          scoreAway: 0,
-        },
-        {
-          id: 3,
-          startTime: "2022-11-26T01:43:48",
-          endTime: "2022-11-26T01:43:48",
-          place: "Cancha 1",
-          nameHome: "Linces",
-          nameAway: "Cuervos",
-          scoreHome: 1,
-          scoreAway: 0,
-        },
-      ],
+      data: matchResponse,
     });
   }
 
