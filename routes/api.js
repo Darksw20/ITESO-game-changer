@@ -36,7 +36,7 @@ router.delete("/user/:id", authUser, User.delete);
 router.post("/event", authUser, Event.create);
 
 // get Events
-router.get("/event", authUser, Event.list);
+router.get("/event", Event.list);
 
 // get Events
 router.get("/event/:id", authUser, Event.get);

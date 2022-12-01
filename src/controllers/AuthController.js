@@ -33,12 +33,12 @@ module.exports = class AuthController {
   }
 
   logout(req, res, next) {
-    const data = req.body;
-    console.log(data);
+    const jwt = req.headers.authorization.split(" ")[1];
+    decodedJwt = JWT.decode(jwt);
     res.json({
       status: 200,
       message: "Logout successfull",
-      data: { email: "juan.perez@iteso.mx" },
+      data: { email: decodedJwt.email },
     });
   }
 };

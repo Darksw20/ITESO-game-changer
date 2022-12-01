@@ -2,7 +2,7 @@ const Model = require("./Model");
 
 module.exports = class Match extends Model {
   constructor() {
-    super("match", ["time", "place", "score"]);
+    super("matches", ["time", "place", "score"]);
   }
   toObject() {
     return {

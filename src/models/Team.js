@@ -7,7 +7,7 @@ module.exports = class Team extends Model {
   toObject() {
     return {
       name: this.name,
-      memberSize: this.memberSize,
+      member_size: this.member_size,
     };
   }
 };
